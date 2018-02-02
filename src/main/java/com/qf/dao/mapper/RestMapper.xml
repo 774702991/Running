@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qf.dao.RestDao">
+
+    <resultMap id="getRestMap" type="ReaList">
+        <id property="id" column="id"/>
+        <result property="title" column="title"/>
+        <result property="style" column="style"/>
+        <result property="author" column="author"/>
+        <result property="comment" column="comment"/>
+        <result property="time" column="time"/>
+        <result property="container" column="content"/>
+        <collection property="imgBox" ofType="ImgBox">
+            <id property="id" column="i_id"/>
+            <result property="imgUrl" column="img_url"/>
+        </collection>
+    </resultMap>
+
+    <select id="getRest" resultMap="getRestMap">
+        select r.id,r.title,r.style,r.author,r.comment,r.time,i.id i_id,i.img_url img_url from realist r
+        left join imgbox i on r.id = i.rea_id order by r.id desc;
+    </select>
+
+    <select id="getRestById" resultMap="getRestMap">
+        select r.id,r.title,r.style,r.author,r.comment,r.time,r.content,i.id i_id,i.img_url img_url from realist r
+        left join imgbox i on r.id = i.rea_id where r.id = #{arg0}
+    </select>
+</mapper>
+    

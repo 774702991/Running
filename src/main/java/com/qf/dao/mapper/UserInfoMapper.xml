@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qf.dao.UserInfoDao">
+
+    <resultMap id="getUserInfoByIdMap" type="UserInfo">
+        <id property="id" column="id"/>
+        <result property="nickname" column="nickname"/>
+        <result property="img" column="img"/>
+        <result property="brithday" column="brithday"/>
+        <result property="sex" column="sex"/>
+        <result property="city" column="city"/>
+        <result property="summary" column="summary"/>
+        <result property="user.id" column="user_id"/>
+        <result property="user.username" column="username"/>
+    </resultMap>
+    <select id="getUserInfoById" parameterType="Integer" resultMap="getUserInfoByIdMap">
+        select id,nickname,img,brithday,sex,city,summary,user_id from user_info
+        where user_id = #{id}
+    </select>
+
+    <insert id="addUserInfo" parameterType="UserInfo" useGeneratedKeys="true" keyProperty="id">
+        insert into user_info(nickname,img,brithday,sex,city,summary,user_id)
+        values('信息需修改',#{img},#{brithday},#{sex},'信息需修改',#{summary},#{user.id})
+    </insert>
+
+    <update id="updateUserInfo" parameterType="UserInfo">
+        update user_info set nickname = #{nickname},brithday = #{brithday},
+        sex = #{sex},city = #{city},summary = #{summary} where user_id = #{user.id}
+    </update>
+
+    <update id="updateUserInfoImg">
+        update user_info set img = #{arg0} where user_id = #{arg1}
+    </update>
+
+    <select id="getUser" resultMap="getUserInfoByIdMap">
+      select u.id user_id,u.username username,i.nickname,i.city from user u
+      inner join user_info i on u.id = i.user_id;
+    </select>
+</mapper>
+    

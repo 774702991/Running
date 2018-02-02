@@ -1,0 +1,17 @@
+{
+	"ret": true,
+	"data": {
+		"usernum": "2014568",
+		"home": "北京市",
+		"emotional": "保密",
+		"level": "5级",
+		"walking": "24km",
+		"grade": "8318",
+		"recently": "0",
+		"running": "0.0km",
+		"cycling": "56km",
+		"fitness": "0min",
+		"latestCycling": "30km",
+		"latestFitness": "0min"
+	}
+}

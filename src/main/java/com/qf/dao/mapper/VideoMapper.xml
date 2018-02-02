@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qf.dao.VideoDao">
+
+    <resultMap id="getVideoMap" type="Video">
+        <id property="id" column="id"/>
+        <result property="videoUrl" column="video_url"/>
+        <result property="style" column="style"/>
+        <result property="author" column="author"/>
+        <result property="time" column="time"/>
+        <result property="imgUrl" column="img_url"/>
+    </resultMap>
+
+    <select id="getVideo" resultMap="getVideoMap">
+      select id,video_url,style,author,time,img_url from video
+    </select>
+
+</mapper>
+    

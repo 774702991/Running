@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qf.dao.CircleDao">
+
+    <resultMap id="getCircleMap" type="Circle">
+        <id property="id" column="id"/>
+        <result property="title" column="title"/>
+        <result property="summary" column="summary"/>
+        <result property="createTime" column="create_time"/>
+        <result property="img" column="img"/>
+        <result property="userInfo.user.id" column="user_id"/>
+        <result property="userInfo.nickname" column="nickname"/>
+    </resultMap>
+
+    <select id="getCircle" resultMap="getCircleMap">
+        select c.id,c.title,c.summary,c.city,c.create_time,c.img,c.user_id
+        from circle c order by c.id desc
+    </select>
+    
+    <insert id="addCircle" parameterType="Circle" keyProperty="id" useGeneratedKeys="true">
+        insert into circle(title,summary,city,create_time,img,user_id)
+        values(#{title},#{summary},#{city},now(),#{img},#{userInfo.user.id})
+    </insert>
+
+    <select id="getCircleAndUser" resultMap="getCircleMap">
+        select c.id,c.title,c.summary,c.city,c.create_time,c.img,c.user_id,u.nickname nickname
+        from circle c inner join user_info u on u.user_id = c.user_id
+        order by c.id desc
+    </select>
+
+    <delete id="delCircle" parameterType="int">
+        delete from circle where id = #{id}
+    </delete>
+</mapper>
+    
